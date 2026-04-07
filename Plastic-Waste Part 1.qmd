@@ -1,8 +1,9 @@
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-![](images/Screenshot 2026-04-06 at 3.18.49 PM.png)title: "quarto source file" author: "Braden O'Donnell" format: html ---
+---
+title: "Plastic Waste Checkpoint 1"
+format: html
+embed-resources: true
+editor: source
+---
 
 #First file for repo
 
@@ -15,10 +16,16 @@ This data has been cleaned by combining a bunch of datasets and then it makes th
 
 Research Questions with data:
 
-Does type of plastic effect the total amount cleaned up? Does more volunteers necessarily mean more plastic waste cleaned up?
+Does type of plastic effect the total amount cleaned up?
+
+Does more volunteers necessarily mean more plastic waste cleaned up?
 
 Research Questions with supplemental data:
 
-Does the time of year affect grand total plastic cleanup amount? Does the income of the volunteers effect plastic cleanup amount?
+Does the time of year affect grand total plastic cleanup amount?
 
-![graph](images/Screenshot%202026-04-06%20at%201.36.47%20AM%20copy.png)
+Does the income of the volunteers effect plastic cleanup amount?
+
+![](images/drawing1.png)
+
+![](images/drawing2.png)
