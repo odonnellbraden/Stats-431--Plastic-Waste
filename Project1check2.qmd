@@ -121,37 +121,37 @@ Female_leader is a constructed variable for type of leader monarch and president
 
 # Part 4
 
-## Summary on: **Which countries have the least stable governments, measured by the frequency of regime changes?**
+## Summary on: Which countries have the highest proportion of postponed elections over time?
 
 ```{r}
-#regime_stability creates a variable avg_reg_change that reports the avg regime changes per yer for that country
-regime_stability <- function(country, data = democracy_data){
+# postponed_elections creates a variable prop_postponed that reports the
+# proportion of years with postponed elections for each country
+postponed_elections <- function(country, data = democracy_data){
   result <- data |>
     filter(country_name == country) |>
     arrange(year) |>
     mutate(
-      change = regime_category_index != lag(regime_category_index) # creates logical variable change
+      postponed = has_postponed_election == TRUE
     ) |>
-    summarise(avg_reg_change = mean(change, na.rm = TRUE))
+    summarise(prop_postponed = mean(postponed, na.rm = TRUE))
   
-  return(result$avg_reg_change)
+  return(result$prop_postponed)
 }
 
-stability_data <- democracy_data |>
+postponed_data <- democracy_data |>
   distinct(country_name) |>
-  mutate(avg_reg_change = map_dbl(country_name,regime_stability)) |>
-  arrange(desc(avg_reg_change))
+  mutate(prop_postponed = map_dbl(country_name, postponed_elections)) |>
+  arrange(desc(prop_postponed))
 
-
-ggplot(stability_data[1:3, ], 
-       aes(x = reorder(country_name, -avg_reg_change), y = avg_reg_change)) +
+ggplot(postponed_data[1:10, ], 
+       aes(x = reorder(country_name, -prop_postponed), y = prop_postponed)) +
   geom_bar(stat = "identity", fill = "dodgerblue") +
-    labs(
-    title = "Least Stable Countries by Regime Change Frequency",
+  labs(
+    title = "Countries with the Highest Proportion of Postponed Elections",
     x = "Country",
-    y = "Average Proportion of Years with Regime Change"
+    y = "Proportion of Years with Postponed Elections"
   ) +
-  theme_minimal()
-```
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-Guinea-Bissau, Bangladesh, and Thailand exhibit the highest frequencies of regime change, indicating they are among the least politically stable countries in the data set.
+```
